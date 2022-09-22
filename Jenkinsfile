@@ -20,15 +20,23 @@ pipeline{
                 name: 'Notification')
         }
         stages{
-            checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/krishnaduttPanchagnula/Multifunctional-terraform-Jenkins-pipeline']]])
-            stage('init'){
-                terraform init
 
+            stage('build'){
+                steps{
+            checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/krishnaduttPanchagnula/Multifunctional-terraform-Jenkins-pipeline']]])
+                }
+            }
+            stage('init'){
+                steps{
+                    sh"terraform init"
+                }
             }
 
-            when {
-                       expression{params.Networking == true}
             stage('action'){
+                when {
+                       expression{params.Networking == true
+                       }
+                }
                 steps{
                     
                     sh"terraform ${params.Actions} -target=module.Netwoking"
@@ -39,8 +47,8 @@ pipeline{
                 steps{
                     echo "${params.BOOL}"
                     
-                }
             }
         }
     }
+}
 
