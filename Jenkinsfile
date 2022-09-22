@@ -20,7 +20,7 @@ pipeline{
                 name: 'Notification')
         }
         stages{
-            checkout()
+            checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/krishnaduttPanchagnula/Multifunctional-terraform-Jenkins-pipeline']]])
             stage('init'){
                 terraform init
 
