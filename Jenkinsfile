@@ -20,7 +20,9 @@ pipeline{
                 name: 'Notification')
         }
         stages{
+            checkout()
             stage('init'){
+                terraform init
 
             }
 
