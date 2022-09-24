@@ -2,7 +2,7 @@ pipeline{
     agent any
         parameters{
             choice(
-                choices:['Plan','Apply','Destroy'],
+                choices:['plan','apply','destroy'],
                 name:'Actions',
                 description: 'Describes the Actions')
             booleanParam(
@@ -19,6 +19,7 @@ pipeline{
                 description: 'TEST',
                 name: 'Notification')
         }
+        
         stages{
 
             stage('build'){
@@ -33,7 +34,10 @@ pipeline{
             }
 
             stage('action'){
-                when {
+
+                stages{
+                    stage('Networking'){
+                         when {
                        expression{params.Networking == true
                        }
                 }
@@ -41,11 +45,39 @@ pipeline{
                     
                     sh"terraform ${params.Actions} -target=module.Netwoking"
                     
+                    }
+
                 }
-            }
-            stage('action21'){
+                stage('Compute'){
+                         when {
+                       expression{params.Compute == true
+                       }
+                }
                 steps{
-                    echo "${params.BOOL}"
+                    
+                    sh"terraform ${params.Actions} -target=module.Compute"
+                    
+                    }
+
+                }
+                stage('Notification'){
+                         when {
+                       expression{params.Notification == true
+                       }
+                }
+                steps{
+                    
+                    sh"terraform ${params.Actions} -target=module.Notification"
+                    
+                    }
+
+                  }              
+              }
+               
+            }
+            stage('Terraform Completed'){
+                steps{
+                    echo "Terraform Done..!"
                     
             }
         }
