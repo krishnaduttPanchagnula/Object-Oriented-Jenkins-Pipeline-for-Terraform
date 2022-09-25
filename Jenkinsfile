@@ -12,16 +12,16 @@ pipeline{
                 description: 'Describes the Actions')
             booleanParam(
                 defaultValue: false,
-                description: 'ALL',
+                description: 'network',
                 name: 'Networking'
                 )
             booleanParam(
                 defaultValue: false,
-                description: 'TEST',
+                description: 'compute',
                 name: 'Compute')
             booleanParam(
                 defaultValue: false,
-                description: 'TEST',
+                description: 'Notify',
                 name: 'Notification')
         }
         
