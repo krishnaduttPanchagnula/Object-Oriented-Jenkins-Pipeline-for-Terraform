@@ -1,4 +1,4 @@
-# Multifunctional-terraform-Jenkins-pipeline
+# Exploring an Object-Oriented Jenkins Pipeline for Terraform
 ### A novel architecture design in Jenkins’ multi-stage Terraform CD pipeline to improve CI/CD granularity
 
 
