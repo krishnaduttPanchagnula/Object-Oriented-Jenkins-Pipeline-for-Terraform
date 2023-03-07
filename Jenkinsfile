@@ -37,6 +37,11 @@ pipeline{
                     sh"terraform init"
                 }
             }
+            stage('Validate'){
+                steps{
+                    sh"terraform validate"
+                }
+            }
 
             stage('action'){
 
